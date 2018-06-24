@@ -19,6 +19,7 @@ namespace bookstore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddEntityFrameworkMySql();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
@@ -32,7 +33,13 @@ namespace bookstore
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(builder =>
+                builder
+                .WithOrigins("http://localhost:9001")
+                .AllowAnyMethod()
+                .AllowAnyHeader());
             app.UseMvc();
+
         }
     }
 }

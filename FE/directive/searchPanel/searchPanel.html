@@ -1,0 +1,27 @@
+<div id="searchPanel" layout="row" layout-align="left center">
+    
+	<md-input-container ng-show="searchType != 'genre'">
+        <input type="text" ng-model="searchValue" required>
+    </md-input-container>
+    <md-select ng-show="searchType == 'genre'" ng-model="genreValue" class="md-no-underline">
+        <md-option value="0">Any</md-option>
+        <md-option value="1">Romance</md-option>
+        <md-option value="2">Mystery</md-option>
+        <md-option value="3">Travel</md-option>
+        <md-option value="4">History</md-option>
+        <md-option value="5">Comics</md-option>
+        <md-option value="6">Fantasy</md-option>
+        <md-option value="7">Poetry</md-option>
+        <md-option value="8">Action</md-option>
+        <md-option value="9">Fiction</md-option>
+    </md-select>
+    <md-select ng-model="searchType" placeholder="search type" class="md-no-underline">
+        <md-option value="title">title</md-option>
+        <md-option value="author">author</md-option>
+        <md-option value="genre">genre</md-option>
+    </md-select>
+    <md-button class="md-raised md-primary" ng-click="searchBook()"> Search </md-button>
+      
+
+
+</div>

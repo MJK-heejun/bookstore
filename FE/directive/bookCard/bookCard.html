@@ -1,0 +1,17 @@
+<div id="bookCard">
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+            <span class="md-headline">{{currentBook.title}}</span>
+            <span class="md-subhead">genre: {{getGenreName(currentBook.genre)}}</span>
+            <span class="md-subhead">author: {{currentBook.author}}</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <p>
+                {{currentBook.description}}
+            </p>
+        </md-card-content>
+    </md-card>
+    <span> </span>
+</div>
