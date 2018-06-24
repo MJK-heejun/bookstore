@@ -24,6 +24,7 @@ namespace bookstore.Controllers
         {
             IEnumerable<BookDto> result = _context.Books;
  
+            //filter the list of books to get the right search result
             if (!string.IsNullOrEmpty(title))
                 result = result.Where(b => b.title.Contains(title));
             if (!string.IsNullOrEmpty(author))
@@ -52,9 +53,9 @@ namespace bookstore.Controllers
 
         // PUT: api/Books/5
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> PutBookDto([FromRoute] int id, [FromBody] BookDto bookDto)
+        public async Task<IActionResult> PutBookDto([FromRoute] int id, [FromBody] BookDto bookDto, [FromHeader] string token, [FromHeader] string username)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || !isTokenValid(username, token))
                 return BadRequest(ModelState);
 
             if (id != bookDto.id)
@@ -79,9 +80,9 @@ namespace bookstore.Controllers
 
         // POST: api/Books
         [HttpPost]
-        public async Task<IActionResult> PostBookDto([FromBody] BookDto bookDto)
+        public async Task<IActionResult> PostBookDto([FromBody] BookDto bookDto, [FromHeader] string token, [FromHeader] string username)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || !isTokenValid(username, token))
                 return BadRequest(ModelState);
 
             _context.Books.Add(bookDto);
@@ -92,9 +93,9 @@ namespace bookstore.Controllers
 
         // DELETE: api/Books/5
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> DeleteBookDto([FromRoute] int id)
+        public async Task<IActionResult> DeleteBookDto([FromRoute] int id, [FromHeader] string token, [FromHeader] string username)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || !isTokenValid(username, token))
                 return BadRequest(ModelState);
 
             var bookDto = await _context.Books.SingleOrDefaultAsync(m => m.id == id);
@@ -112,6 +113,11 @@ namespace bookstore.Controllers
             return _context.Books.Any(e => e.id == id);
         }
         
+        private bool isTokenValid(string username="", string token="")
+        {
+            return _context.Users.Any(user => user.username == username && user.token == token);
+        }
+
     }
 
 }

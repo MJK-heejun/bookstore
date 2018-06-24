@@ -1,4 +1,4 @@
-angular.module('bookstore', ['ui.bootstrap','ui.utils','ui.router','ngAnimate', 'ngMaterial', 'doowb.angular-pusher']);
+angular.module('bookstore', ['ui.bootstrap','ui.utils','ui.router','ngAnimate', 'ngMaterial']);
 
 angular.module('bookstore').config(function($stateProvider, $urlRouterProvider) {
 
@@ -20,28 +20,10 @@ angular.module('bookstore').run(function($rootScope) {
         }
     };
 
-})
-
-.config(['PusherServiceProvider',
-  function(PusherServiceProvider) {
-    PusherServiceProvider
-    .setToken('a29d983b9d414e97155c')
-    .setOptions({});
-  }
-])
-
-.controller('bookstoreController', ['$scope', '$rootScope', '$mdDialog',
+}).controller('bookstoreController', ['$scope', '$rootScope', '$mdDialog',
     function($scope, $rootScope, $mdDialog) {
 
-        $rootScope.isLoggedIn = true;
-
-        $scope.$on("loginEvent", function() {
-            $rootScope.isLoggedIn = true;
-        });
-
-
-            
-
+        $rootScope.isLoggedIn = false;
 
 
         //md modal dialog

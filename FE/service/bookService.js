@@ -18,17 +18,34 @@ angular.module('bookstore')
 
         bookService.createBook = function(book){
             var url = rootUrl + '/api/books';
-            return $http.post(url, book);
+            return $http.post(url, {  
+                data: book,      
+                headers:{
+                    'username': $rootScope.username,
+                    'token': $rootScope.token
+                }
+            });
         };
 
         bookService.updateBook = function(book, id){
             var url = rootUrl + '/api/books/'+id;
-            return $http.put(url, book);
+            return $http.put(url, {  
+                data: book,      
+                headers:{
+                    'username': $rootScope.username,
+                    'token': $rootScope.token
+                }
+            });
         };
 
         bookService.deleteBook = function(id){
             var url = rootUrl + '/api/books/'+id;
-            return $http.delete(url);
+            return $http.delete(url, {        
+                headers:{
+                    'username': $rootScope.username,
+                    'token': $rootScope.token
+                }
+            });
         };
         
         return bookService;

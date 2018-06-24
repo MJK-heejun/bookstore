@@ -24,6 +24,7 @@ angular.module('bookstore').directive('bookDetail', function() {
                 bookService.deleteBook($scope.currentBook.id)
                     .then(function(response) {
                             $scope.deselectBook();
+                            $rootScope.popup("Deleted", "");
                         }, function(response) {
                             $rootScope.popup("Error", response.data);
                     });

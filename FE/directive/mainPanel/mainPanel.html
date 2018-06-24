@@ -1,7 +1,7 @@
 <div id="mainPanel">
 	<div ng-if="!currentBook">
 		<search-panel book-list="bookList"></search-panel>
-		<md-button class="md-raised md-primary" aria-label="create" ng-click="createBook()">
+		<md-button class="md-raised md-primary" aria-label="create" ng-click="createBook()" ng-show="$root.isLoggedIn">
 			Create new
 		</md-button>
 		<div>

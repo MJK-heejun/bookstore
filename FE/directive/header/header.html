@@ -5,9 +5,12 @@
                 <span>Book Catalog</span>
             </h2>
             <span flex></span>
-            <md-button class="md-raised" aria-label="Login">
+            <md-button class="md-raised" aria-label="Login" ng-click="login()" ng-show="!$root.username">
                 Login
             </md-button>
+            <md-button class="md-raised" aria-label="Login" ng-click="logout()" ng-show="$root.username">
+                Logout
+            </md-button>            
         </div>
     </md-toolbar>
 </div>
