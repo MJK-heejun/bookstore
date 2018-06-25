@@ -1,10 +1,8 @@
 ﻿using bookstore.Dto;
+using bookstore.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace bookstore.Controllers
@@ -28,42 +26,20 @@ namespace bookstore.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            string hashedPass = convertToHashedString(userDto.password);
+            string hashedPass = AuthHelper.ConvertToHashedString(userDto.password);
             var result = _context.Users
                 .Where(u => u.username == userDto.username && u.password == hashedPass)
                 .FirstOrDefault();
 
             if (result != null)
             {
-                result.token = createToken(99);
+                result.token = AuthHelper.CreateToken(99);
                 await _context.SaveChangesAsync();
                 return Ok(new { username = result.username, token = result.token });
             }
             return BadRequest("invalid login");
         }
         
-        private string convertToHashedString(string password)
-        {
-            using (SHA1Managed sha1 = new SHA1Managed())
-            {
-                var hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(password));
-                var sb = new StringBuilder(hash.Length * 2);
-                foreach (byte b in hash)
-                    sb.Append(b.ToString("X2"));
-                return sb.ToString();
-            }
-        }
-        private string createToken(int length)
-        {
-            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-            StringBuilder res = new StringBuilder();
-            Random rnd = new Random();
-            while (0 < length--)
-            {
-                res.Append(valid[rnd.Next(valid.Length)]);
-            }
-            return res.ToString();
-        }
     }
 
 }
