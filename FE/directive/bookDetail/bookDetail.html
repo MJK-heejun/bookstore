@@ -2,7 +2,7 @@
     
     <div layout="row" layout-align="space-between center">
         <md-button class="md-raised" aria-label="back" ng-click="deselectBook()">
-            <= Back
+            Back
         </md-button>
         <div ng-show="$root.isLoggedIn">
             <div ng-show="!editModeEnabled">
@@ -25,6 +25,7 @@
     </div>
     <div ng-show="!editModeEnabled"> 
         <h2>Title: {{currentBook.title}}</h2>
+        <p>Genre: {{getGenreName(currentBook.genre)}}</p>
         <p>Author: {{currentBook.author}}</p>
         <p>Description: {{currentBook.description}}</p>
     </div>
@@ -33,6 +34,24 @@
             <label>Title</label>
             <input ng-model="currentBook.title">
         </md-input-container>
+
+
+        <md-input-container class="md-block">
+            <label>Genre</label>
+            <md-select ng-model="currentBook.genre">
+                <md-option value="0">Any</md-option>
+                <md-option value="1">Romance</md-option>
+                <md-option value="2">Mystery</md-option>
+                <md-option value="3">Travel</md-option>
+                <md-option value="4">History</md-option>
+                <md-option value="5">Comics</md-option>
+                <md-option value="6">Fantasy</md-option>
+                <md-option value="7">Poetry</md-option>
+                <md-option value="8">Action</md-option>
+                <md-option value="9">Fiction</md-option>
+            </md-select>
+        </md-input-container>
+
         <md-input-container>
             <label>Author</label>
             <input ng-model="currentBook.author">

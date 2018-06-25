@@ -18,8 +18,7 @@ angular.module('bookstore')
 
         bookService.createBook = function(book){
             var url = rootUrl + '/api/books';
-            return $http.post(url, {  
-                data: book,      
+            return $http.post(url, book, { 
                 headers:{
                     'username': $rootScope.username,
                     'token': $rootScope.token
@@ -29,8 +28,7 @@ angular.module('bookstore')
 
         bookService.updateBook = function(book, id){
             var url = rootUrl + '/api/books/'+id;
-            return $http.put(url, {  
-                data: book,      
+            return $http.put(url, book, {
                 headers:{
                     'username': $rootScope.username,
                     'token': $rootScope.token

@@ -39,7 +39,7 @@ namespace bookstore
                 .AllowAnyMethod()
                 .AllowAnyHeader());
             app.UseMvc();
-
+            app.UseStaticFiles();
         }
     }
 }

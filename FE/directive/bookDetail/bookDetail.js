@@ -30,6 +30,33 @@ angular.module('bookstore').directive('bookDetail', function() {
                     });
             });
         };
+
+        $scope.getGenreName = function(genreEnum){ //enum translate
+            switch(genreEnum) {
+                case 0:
+                    return "Any";
+                case 1:
+                    return "Romance";
+                case 2:
+                    return "Mystery";
+                case 3:
+                    return "Travel";
+                case 4:
+                    return "History";
+                case 5:
+                    return "Comics";
+                case 6:
+                    return "Fantasy";
+                case 7:
+                    return "Poetry";
+                case 8:
+                    return "Action";                   
+                case 9:
+                    return "Fiction";                                                                                                                         
+                default:
+                    return "unknown";  
+            }
+        };        
     };
 
     return {
